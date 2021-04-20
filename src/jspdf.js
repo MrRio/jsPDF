@@ -3233,7 +3233,11 @@ function jsPDF(options) {
       scaleFactor = 6;
       break;
     default:
-      throw new Error("Invalid unit: " + unit);
+      if (typeof unit === "number") {
+          scaleFactor = unit;
+      } else {
+          throw new Error("Invalid unit: " + unit);
+      }
   }
 
   var encryption = null;
