@@ -122,6 +122,29 @@ describe("Module: Cell", () => {
     comparePdf(doc.output(), "table-autoSize.pdf");
   });
 
+  it("table-formatted", () => {
+    var doc = new jsPDF({
+      putOnlyUsedFonts: true,
+      orientation: "landscape",
+      floatPrecision: 2
+    });
+    doc.table(1, 1, generateData(100), header, {
+      rowStart: function(e) {
+        if (17 < e.row && e.row < 36)
+          doc.setTextColor(255,0,0);
+        else
+          doc.setTextColor(0,0,0);
+      },
+      cellStart: function(e) {
+        if (e.row === 27 && e.col === 3)
+          doc.setFont(undefined, "bold");
+        else
+          doc.setFont(undefined, "normal");
+      }
+    });
+    comparePdf(doc.output(), "table-formatted.pdf");
+  });
+
   it("table error handling", () => {
     var doc = new jsPDF({ putOnlyUsedFonts: true, orientation: "landscape" });
     expect(function() {
