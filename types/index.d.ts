@@ -223,6 +223,7 @@ declare module "jspdf" {
   export interface HTMLOptions {
     callback?: (doc: jsPDF) => void;
     margin?: number | number[];
+    autoPaging?: boolean | "slice" | "text";
     filename?: string;
     image?: HTMLOptionImage;
     html2canvas?: Html2CanvasOptions;
@@ -370,6 +371,7 @@ declare module "jspdf" {
 
   export interface Context2d {
     autoPaging: boolean;
+    margin: number[];
     fillStyle: string | Gradient;
     filter: string;
     font: string;
